@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pickup and Courier Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+      /* Add your CSS styles here */
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+      header {
+        background-color: #333;
+        color: #fff;
+        padding: 10px 0;
+        text-align: center;
+      }
+      nav {
+        background-color: #f4f4f4;
+        padding: 10px;
+      }
+      nav ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+      }
+      nav ul li {
+        display: inline;
+        margin-right: 20px;
+      }
+      .insights {
+        margin: 20px auto;
+        max-width: 800px;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+      }
+      .chart-container {
+        margin-top: 20px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Pickup and Courier Dashboard</h1>
+    </header>
+    <nav>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Pickup Request</a></li>
+        <li><a href="#">Courier Tracking</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </nav>
+    <section class="insights">
+      <h2>Analysis Insights</h2>
+      <div class="chart-container">
+        <canvas id="pickupVsDeliveryChart" width="400" height="200"></canvas>
+      </div>
+      <div class="chart-container">
+        <canvas id="shipmentStatusChart" width="400" height="200"></canvas>
+      </div>
+      <div class="chart-container">
+        <canvas id="courierTypeChart" width="400" height="200"></canvas>
+      </div>
+      <h2>Pickup and Delivery Statistics</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Count</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Pickups</td>
+            <td>120</td>
+          </tr>
+          <tr>
+            <td>Deliveries</td>
+            <td>80</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <script>
+      // Sample data for insights
+      const pickupVsDeliveryData = {
+        labels: ["Pickup", "Delivery"],
+        datasets: [
+          {
+            label: "Pickup vs Delivery",
+            data: [70, 30],
+            backgroundColor: [
+              "rgba(255, 99, 132, 0.5)",
+              "rgba(54, 162, 235, 0.5)",
+            ],
+            borderColor: ["rgba(255, 99, 132, 1)", "rgba(54, 162, 235, 1)"],
+            borderWidth: 1,
+          },
+        ],
+      };
+
+      const shipmentStatusData = {
+        labels: ["Shipped", "Delivered", "Pending"],
+        datasets: [
+          {
+            label: "Shipment Status",
+            data: [60, 30, 10],
+            backgroundColor: [
+              "rgba(255, 206, 86, 0.5)",
+              "rgba(75, 192, 192, 0.5)",
+              "rgba(153, 102, 255, 0.5)",
+            ],
+            borderColor: [
+              "rgba(255, 206, 86, 1)",
+              "rgba(75, 192, 192, 1)",
+              "rgba(153, 102, 255, 1)",
+            ],
+            borderWidth: 1,
+          },
+        ],
+      };
+
+      const courierTypeData = {
+        labels: ["Standard", "Express", "Overnight"],
+        datasets: [
+          {
+            label: "Courier Types",
+            data: [40, 30, 30],
+            backgroundColor: [
+              "rgba(255, 99, 132, 0.5)",
+              "rgba(54, 162, 235, 0.5)",
+              "rgba(255, 206, 86, 0.5)",
+            ],
+            borderColor: [
+              "rgba(255, 99, 132, 1)",
+              "rgba(54, 162, 235, 1)",
+              "rgba(255, 206, 86, 1)",
+            ],
+            borderWidth: 1,
+          },
+        ],
+      };
+
+      // Create charts
+      const ctx1 = document
+        .getElementById("pickupVsDeliveryChart")
+        .getContext("2d");
+      const pickupVsDeliveryChart = new Chart(ctx1, {
+        type: "doughnut",
+        data: pickupVsDeliveryData,
+      });
+
+      const ctx2 = document
+        .getElementById("shipmentStatusChart")
+        .getContext("2d");
+      const shipmentStatusChart = new Chart(ctx2, {
+        type: "pie",
+        data: shipmentStatusData,
+      });
+
+      const ctx3 = document.getElementById("courierTypeChart").getContext("2d");
+      const courierTypeChart = new Chart(ctx3, {
+        type: "bar",
+        data: courierTypeData,
+        options: {
+          scales: {
+            yAxes: [
+              {
+                ticks: {
+                  beginAtZero: true,
+                },
+              },
+            ],
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
